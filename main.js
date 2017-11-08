@@ -1,5 +1,12 @@
 //Obtain the gridPieces from the HTML Documenet
 
+//rows --> Stores the individual row element
+//columns--> Store the individual column from each row element
+
+//cells[][] --> Array which stores the individual HTML block element in (x,y) format
+//CellObject() --> Constructor function that initialises the object corresponding to each HTML block
+//cellObjects() --> Array of CellObject corresponding to each individual HTML block
+
 var rows = document.getElementsByClassName("row");
 
 var cells = [
@@ -45,6 +52,11 @@ var GameFunctions = {
                     cells[x][y].textContent = " ";
                 }
             }
+        }
+    },
+
+    individualPull:{
+        right: function(cell){
         }
     }
 }

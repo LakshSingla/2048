@@ -11,8 +11,11 @@ var rows = document.getElementsByClassName("row");
 
 var cells = [
     [], [], [], []
-]
+];
 
+cellObjects = [
+    [], [], [], []
+];
 
 
 for (var y = 0; y<rows.length; y++){
@@ -30,14 +33,10 @@ var CellObject = function(x, y, value){
 
 var GameFunctions = {
 
-    cellObjects: [
-        [], [], [], []
-    ],
-
     initializeCellObjects: function(){
         for(var y = 0; y<rows.length; y++){
             for(var x = 0; x<columns.length; x++){
-                this.cellObjects[x][y] = new CellObject(x, y, null);
+                cellObjects[x][y] = new CellObject(x, y, null);
             }
         }
     },
@@ -45,8 +44,8 @@ var GameFunctions = {
     displayCellObjects: function(){
         for(var y = 0; y<rows.length; y++){
             for(var x = 0; x<columns.length; x++){
-                if(this.cellObjects[x][y].value){
-                    cells[x][y].textContent = String(this.cellObjects[x][y].value);
+                if(cellObjects[x][y].value){
+                    cells[x][y].textContent = String(cellObjects[x][y].value);
                 }
                 else{
                     cells[x][y].textContent = " ";
@@ -57,9 +56,42 @@ var GameFunctions = {
 
     individualPull:{
         right: function(cell){
+            var i;
+            for(i = cell.x + 1; i<rows.length; i++){
+                if(!cellObjects[i][cell.y].value){
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+            cellObjects[i-1][cell.y].value = cell.value;
+            cellObjects[cell.x][cell.y].value = null;
+        },
+
+        left: function(cell){
+            var i;
+            for(i = cell.x - 1; i >= 0; i--){
+                if(!cellObjects[i][cell.y].value){
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+            cellObjects[i+1][cell.y].value = cell.value;
+            cellObjects[cell.x][cell.y].value = null;
+        },
+
+        top: function(cell){
+            
         }
     }
 }
 
 GameFunctions.initializeCellObjects();
+GameFunctions.displayCellObjects();
+
+cellObjects[3][2].value = 3;
+cellObjects[1][2].value = 4;
 GameFunctions.displayCellObjects();

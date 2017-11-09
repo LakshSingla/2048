@@ -83,11 +83,36 @@ var GameFunctions = {
             cellObjects[cell.x][cell.y].value = null;
         },
 
+        bottom: function(cell){
+            var i;
+            for(i = cell.y + 1; i<rows.length; i++){
+                if(!cellObjects[cell.x][i].value){
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+            cellObjects[cell.x][i-1].value = cell.value;
+            cellObjects[cell.x][cell.y].value = null;
+        },
+
         top: function(cell){
-            
+            var i;
+            for(i = cell.y - 1; i>=0; i--){
+                if(!cellObjects[cell.x][i].value){
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+            cellObjects[cell.x][i+1].value = cell.value;
+            cellObjects[cell.x][cell.y].value = null;
         }
     }
-}
+};
+
 
 GameFunctions.initializeCellObjects();
 GameFunctions.displayCellObjects();

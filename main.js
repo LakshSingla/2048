@@ -153,46 +153,46 @@ var GameFunctions = {
                 }
             }
         }
+    },
+
+    merge:{
+        column: function(colMain, colMerge){
+            for(var i = 0; i < columnLength; i++){
+                if(cellObjects[colMain][i].value!=0&&cellObjects[colMerge][i].value!=0){
+                    if(cellObjects[colMain][i].value==cellObjects[colMerge][i].value){
+                        cellObjects[colMain][i].value*=2;
+                        cellObjects[colMerge][i].value = null;
+                    }
+                }
+            }
+        },
+
+        row: function(rowMain, rowMerge){
+            for(var i = 0; i < rowLength; i++){
+                if(cellObjects[i][rowMain].value!=0&&cellObjects[i][rowMain].value!=0){
+                    if(cellObjects[i][rowMain].value==cellObjects[i][rowMerge].value){
+                        cellObjects[i][rowMain].value*=2;
+                        cellObjects[i][rowMerge].value = null;
+                    }
+                }
+            }
+        }
     }
-
 };
-
-// groupPull = {
-//     right: function(){
-//         for(var xa = rowLength - 1; xa>= 0; xa--){
-//             for(var ya = 0; ya <columnLength; ya++){
-//                 GameFunctions.individualPull.right(cellObjects[xa][ya]);
-//             }
-//         }
-//     }
-// };
-
-// groupPull = {
-//     right: function(){
-//         var xa, ya;
-//         for(xa = rowLength - 1; xa>=0; xa--){
-//             for(ya = 0; ya<columnL)
-//         }
-//     }
-// };
-
 
 GameFunctions.initializeCellObjects();
 GameFunctions.displayCellObjects();
 
-cellObjects[3][2].value = 3;
-cellObjects[1][2].value = 4;
-cellObjects[2][1].value = 1;
-cellObjects[0][3].value = 1;
-cellObjects[3][3].value = 5;
-cellObjects[2][3].value = 3;
-cellObjects[0][0].value = 1;
-cellObjects[2][0].value = 7;
-
+cellObjects[3][2].value = 2;
+cellObjects[1][2].value = 2;
+cellObjects[2][1].value = 4;
+cellObjects[0][3].value = 8;
+cellObjects[3][3].value = 2;
+cellObjects[2][3].value = 2;
+cellObjects[0][0].value = 2;
+cellObjects[2][0].value = 4;
 
 GameFunctions.displayCellObjects();
-// GameFunctions.individualPull.right(cellObjects[1][2]);
-// GameFunctions.displayCellObjects();
 
 document.addEventListener("keydown", function(e){
     var keyCode = e.keyCode || e.which,
@@ -202,17 +202,41 @@ document.addEventListener("keydown", function(e){
     switch (keyCode) {
         case arrow.right:
             GameFunctions.groupPull.right();
+            GameFunctions.merge.column(3, 2);
+            GameFunctions.groupPull.right();
+            GameFunctions.merge.column(2, 1);
+            GameFunctions.groupPull.right();
+            GameFunctions.merge.column(1, 0);
+            GameFunctions.groupPull.right();
             break;
 
         case arrow.left:
+            GameFunctions.groupPull.left();
+            GameFunctions.merge.column(0, 1);
+            GameFunctions.groupPull.left();
+            GameFunctions.merge.column(1, 2);
+            GameFunctions.groupPull.left();
+            GameFunctions.merge.column(2, 3);
             GameFunctions.groupPull.left();
             break;
 
         case arrow.bottom:
             GameFunctions.groupPull.bottom();
+            GameFunctions.merge.row(3, 2);
+            GameFunctions.groupPull.bottom();
+            GameFunctions.merge.row(2, 1);
+            GameFunctions.groupPull.bottom();
+            GameFunctions.merge.row(1, 0);
+            GameFunctions.groupPull.bottom();
             break;
 
         case arrow.top:
+            GameFunctions.groupPull.top();
+            GameFunctions.merge.row(0, 1);
+            GameFunctions.groupPull.top();
+            GameFunctions.merge.row(1, 2);
+            GameFunctions.groupPull.top();
+            GameFunctions.merge.row(2, 3);
             GameFunctions.groupPull.top();
             break;
 

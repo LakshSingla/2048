@@ -7,7 +7,12 @@
 //CellObject() --> Constructor function that initialises the object corresponding to each HTML block
 //cellObjects() --> Array of CellObject corresponding to each individual HTML block
 
+var rowLength = 4,
+    columnLength = 4;
+
 var rows = document.getElementsByClassName("row");
+
+// var columnLength = 4;
 
 var cells = [
     [], [], [], []
@@ -57,7 +62,8 @@ var GameFunctions = {
     individualPull:{
         right: function(cell){
             var i;
-            for(i = cell.x + 1; i<rows.length; i++){
+            var tempVal = cell.value
+            for(i = cell.x + 1; i<rowLength; i++){
                 if(!cellObjects[i][cell.y].value){
                     continue;
                 }
@@ -65,12 +71,13 @@ var GameFunctions = {
                     break;
                 }
             }
-            cellObjects[i-1][cell.y].value = cell.value;
             cellObjects[cell.x][cell.y].value = null;
+            cellObjects[i-1][cell.y].value = tempVal;
         },
 
         left: function(cell){
             var i;
+            var tempVal = cell.value;
             for(i = cell.x - 1; i >= 0; i--){
                 if(!cellObjects[i][cell.y].value){
                     continue;
@@ -79,12 +86,13 @@ var GameFunctions = {
                     break;
                 }
             }
-            cellObjects[i+1][cell.y].value = cell.value;
             cellObjects[cell.x][cell.y].value = null;
+            cellObjects[i+1][cell.y].value = tempVal;
         },
 
         bottom: function(cell){
             var i;
+            var tempVal = cell.value;
             for(i = cell.y + 1; i<rows.length; i++){
                 if(!cellObjects[cell.x][i].value){
                     continue;
@@ -93,12 +101,13 @@ var GameFunctions = {
                     break;
                 }
             }
-            cellObjects[cell.x][i-1].value = cell.value;
             cellObjects[cell.x][cell.y].value = null;
+            cellObjects[cell.x][i-1].value = tempVal;
         },
 
         top: function(cell){
             var i;
+            var tempVal = cell.value;
             for(i = cell.y - 1; i>=0; i--){
                 if(!cellObjects[cell.x][i].value){
                     continue;
@@ -107,11 +116,65 @@ var GameFunctions = {
                     break;
                 }
             }
-            cellObjects[cell.x][i+1].value = cell.value;
             cellObjects[cell.x][cell.y].value = null;
+            cellObjects[cell.x][i+1].value = tempVal;
+        }
+    },
+
+    groupPull : {
+        right: function(){
+            for(var x = rowLength - 1; x>= 0; x--){
+                for(var y = 0; y < columnLength; y++){
+                    GameFunctions.individualPull.right(cellObjects[x][y]);
+                }
+            }
+        },
+
+        left: function(){
+            for(var x = 0; x < rowLength; x++){
+                for(var y = 0; y < columnLength; y++){
+                    GameFunctions.individualPull.left(cellObjects[x][y]);
+                }
+            }
+        },
+
+        bottom: function(){
+            for(var y = columnLength - 1; y >= 0; y--){
+                for(var x = 0; x < rowLength; x++){
+                    GameFunctions.individualPull.bottom(cellObjects[x][y]);
+                }
+            }
+        },
+
+        top: function(){
+            for(var y = 0; y < columnLength; y++){
+                for(var x = 0; x < rowLength; x++){
+                    GameFunctions.individualPull.top(cellObjects[x][y]);
+                }
+            }
         }
     }
+
 };
+
+// groupPull = {
+//     right: function(){
+//         for(var xa = rowLength - 1; xa>= 0; xa--){
+//             for(var ya = 0; ya <columnLength; ya++){
+//                 GameFunctions.individualPull.right(cellObjects[xa][ya]);
+//             }
+//         }
+//     }
+// };
+
+// groupPull = {
+//     right: function(){
+//         var xa, ya;
+//         for(xa = rowLength - 1; xa>=0; xa--){
+//             for(ya = 0; ya<columnL)
+//         }
+//     }
+// };
 
 
 GameFunctions.initializeCellObjects();
@@ -119,4 +182,14 @@ GameFunctions.displayCellObjects();
 
 cellObjects[3][2].value = 3;
 cellObjects[1][2].value = 4;
+cellObjects[2][1].value = 1;
+cellObjects[0][3].value = 1;
+cellObjects[3][3].value = 5;
+cellObjects[2][3].value = 3;
+cellObjects[0][0].value = 1;
+cellObjects[2][0].value = 7;
+
+
 GameFunctions.displayCellObjects();
+// GameFunctions.individualPull.right(cellObjects[1][2]);
+// GameFunctions.displayCellObjects();

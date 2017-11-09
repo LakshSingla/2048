@@ -193,3 +193,34 @@ cellObjects[2][0].value = 7;
 GameFunctions.displayCellObjects();
 // GameFunctions.individualPull.right(cellObjects[1][2]);
 // GameFunctions.displayCellObjects();
+
+document.addEventListener("keydown", function(e){
+    var keyCode = e.keyCode || e.which,
+        arrow = {
+            left: 37, top: 38, right: 39, bottom: 40
+        }
+    switch (keyCode) {
+        case arrow.right:
+            GameFunctions.groupPull.right();
+            break;
+
+        case arrow.left:
+            GameFunctions.groupPull.left();
+            break;
+
+        case arrow.bottom:
+            GameFunctions.groupPull.bottom();
+            break;
+
+        case arrow.top:
+            GameFunctions.groupPull.top();
+            break;
+
+        default:
+
+            break;
+
+    }
+
+    GameFunctions.displayCellObjects();
+});

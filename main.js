@@ -195,13 +195,17 @@ var GameFunctions = {
 
     randomGenerate: function(){
         var randomNumber;
-        switch (Math.floor(Math.random() * 4)) {
+        switch (Math.floor(Math.random() * 8)) {
             case 0:
             case 1:
             case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
                 randomNumber = 2;
                 break;
-            case 3:
+            case 7:
                 randomNumber = 4;
                 break;
             default:

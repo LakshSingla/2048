@@ -22,6 +22,21 @@ cellObjects = [
     [], [], [], []
 ];
 
+var colorScheme = {
+    default: "#CCC0B0",
+    2 : "#EEE4D8",
+    4 : "#ECE2C4",
+    8 : "#F8AF6C",
+    16 : "#F4863C",
+    32 : "#FF6C4F",
+    64 : "#F63D13",
+    128 : "#F1E15A",
+    256 : "#EDD450",
+    512 : "#EED039",
+    1024 : "#EECD17"
+};
+
+
 
 for (var y = 0; y<rows.length; y++){
     var columns = rows[y].getElementsByClassName("sq");
@@ -51,9 +66,11 @@ var GameFunctions = {
             for(var x = 0; x<columns.length; x++){
                 if(cellObjects[x][y].value){
                     cells[x][y].textContent = String(cellObjects[x][y].value);
+                    cells[x][y].style.backgroundColor = colorScheme[cellObjects[x][y].value];
                 }
                 else{
                     cells[x][y].textContent = " ";
+                    cells[x][y].style.backgroundColor = colorScheme.default;
                 }
             }
         }
@@ -213,6 +230,7 @@ var GameFunctions = {
                 break;
         }
         GameFunctions.randomCell().value = randomNumber;
+
     }
 };
 

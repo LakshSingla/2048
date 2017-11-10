@@ -24,7 +24,7 @@ cellObjects = [
 
 
 for (var y = 0; y<rows.length; y++){
-    var columns = rows[y].getElementsByClassName("column");
+    var columns = rows[y].getElementsByClassName("sq");
     for(var x = 0; x<columns.length; x++){
         cells[x][y] = columns[x];
     }

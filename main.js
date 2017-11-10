@@ -177,21 +177,44 @@ var GameFunctions = {
                 }
             }
         }
+    },
+
+    randomCell: function(){
+        var emptyPositions = [];
+        for(var y = 0; y < columnLength; y++){
+            for(var x = 0; x < rowLength; x++){
+                if(!cellObjects[x][y].value){
+                    emptyPositions.push(x + y*4);
+                }
+            }
+        }
+        var randomXY = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+
+        return cellObjects[randomXY%4][Math.floor(randomXY/4)];
+    },
+
+    randomGenerate: function(){
+        var randomNumber;
+        switch (Math.floor(Math.random() * 4)) {
+            case 0:
+            case 1:
+            case 2:
+                randomNumber = 2;
+                break;
+            case 3:
+                randomNumber = 4;
+                break;
+            default:
+                randomNumber = 2;
+                break;
+        }
+        GameFunctions.randomCell().value = randomNumber;
     }
 };
 
 GameFunctions.initializeCellObjects();
-GameFunctions.displayCellObjects();
-
-cellObjects[3][2].value = 2;
-cellObjects[1][2].value = 2;
-cellObjects[2][1].value = 4;
-cellObjects[0][3].value = 8;
-cellObjects[3][3].value = 2;
-cellObjects[2][3].value = 2;
-cellObjects[0][0].value = 2;
-cellObjects[2][0].value = 4;
-
+GameFunctions.randomGenerate();
+GameFunctions.randomGenerate();
 GameFunctions.displayCellObjects();
 
 document.addEventListener("keydown", function(e){
@@ -245,6 +268,6 @@ document.addEventListener("keydown", function(e){
             break;
 
     }
-
+    GameFunctions.randomGenerate();
     GameFunctions.displayCellObjects();
 });

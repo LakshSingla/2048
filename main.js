@@ -290,6 +290,8 @@ document.addEventListener("keydown", function(e){
             break;
 
     }
-    GameFunctions.randomGenerate();
-    GameFunctions.displayCellObjects();
+    if(keyCode == arrow.left ||keyCode == arrow.right ||keyCode == arrow.top ||keyCode == arrow.bottom){
+        GameFunctions.randomGenerate();
+        GameFunctions.displayCellObjects();
+    }
 });

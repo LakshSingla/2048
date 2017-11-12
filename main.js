@@ -33,7 +33,8 @@ var colorScheme = {
     128 : "#F1E15A",
     256 : "#EDD450",
     512 : "#EED039",
-    1024 : "#EECD17"
+    1024 : "#EECD17",
+    2048 : "#E9C700"
 };
 
 
@@ -66,7 +67,12 @@ var GameFunctions = {
             for(var x = 0; x<columns.length; x++){
                 if(cellObjects[x][y].value){
                     cells[x][y].textContent = String(cellObjects[x][y].value);
-                    cells[x][y].style.backgroundColor = colorScheme[cellObjects[x][y].value];
+                    if(cellObjects[x][y].value<=2048){
+                        cells[x][y].style.backgroundColor = colorScheme[cellObjects[x][y].value];
+                    }
+                    else{
+                        cells[x][y].style.backgroundColor = "#373A34";
+                    }
                 }
                 else{
                     cells[x][y].textContent = " ";

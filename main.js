@@ -22,6 +22,8 @@ cellObjects = [
     [], [], [], []
 ];
 
+var score = 0;
+
 var colorScheme = {
     default: "#CCC0B0",
     2 : "#EEE4D8",
@@ -184,6 +186,8 @@ var GameFunctions = {
                 if(cellObjects[colMain][i].value!=0&&cellObjects[colMerge][i].value!=0){
                     if(cellObjects[colMain][i].value==cellObjects[colMerge][i].value){
                         cellObjects[colMain][i].value*=2;
+                        score += cellObjects[colMain][i].value;
+                        console.log(score);
                         cellObjects[colMerge][i].value = null;
                     }
                 }
@@ -195,6 +199,8 @@ var GameFunctions = {
                 if(cellObjects[i][rowMain].value!=0&&cellObjects[i][rowMain].value!=0){
                     if(cellObjects[i][rowMain].value==cellObjects[i][rowMerge].value){
                         cellObjects[i][rowMain].value*=2;
+                        score += cellObjects[i][rowMain].value;
+                        console.log(score);
                         cellObjects[i][rowMerge].value = null;
                     }
                 }
